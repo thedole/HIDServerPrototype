@@ -10,10 +10,31 @@
     <script src="WinJS/js/ui.js"></script>
 
     <!-- HIDServer.Prototype references -->
-    <link href="/css/default.css" rel="stylesheet" />
+    <link href="/css/default.css" rel="stylesheet"/>
+    <script src="/js/devicedata.js"></script>
     <script src="/js/default.js"></script>
 </head>
 <body class="win-type-body">
-    <ul id="output"></ul>
+<!-- Simple template for the ListView instantiation -->
+<div class="deviceInfoTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+    <div class="smallListIconTextItem">
+        <div class="smallListIconTextItem-Detail">
+            <h4 class="win-h4" data-win-bind="textContent: name"></h4>
+            <h6 class="win-h6" data-win-bind="textContent: kind"></h6>
+        </div>
+    </div>
+</div>
+
+<!-- The declarative markup necesary for ListView instantiation -->
+<!-- Call WinJS.UI.processAll() in your initialization code -->
+<div data-win-control="WinJS.UI.ListView"
+     data-win-options="{
+            itemDataSource: HIDServer.Prototype.Devices.list.dataSource,
+            itemTemplate: select('.deviceInfoTemplate'),
+            selectionMode: 'none',
+            tapBehavior: 'none',
+            layout: { type: WinJS.UI.GridLayout }
+    }">
+</div>
 </body>
 </html>
